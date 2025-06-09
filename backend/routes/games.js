@@ -13,10 +13,10 @@ router.get('/', gamesCtrl.index);
 // POST /api/games (CREATE action)
 router.post('/', gamesCtrl.create);
 // GET /api/games/:gameId (SHOW action)
-router.post('/:gameId ', gamesCtrl.show);
+router.post('/:gameId', gamesCtrl.show);
 // PUT /api/games/:gameId (UPDATE action)
-router.post('/:gameId ', gamesCtrl.update);
+router.post('/:gameId', gamesCtrl.update);
 // DELETE /api/games/:gameId  (DELETE action)
-router.post('/:gameId ', gamesCtrl.delete);
+router.post('/:gameId', gamesCtrl.delete);
 
 module.exports = router;
