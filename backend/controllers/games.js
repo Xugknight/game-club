@@ -39,3 +39,13 @@ async function create(req, res) {
   }
 }
 
+async function show(req, res) {
+  try {
+    const game = await Game.findById(req.params.gameId).populate('createdBy', 'username');
+    if (!game) return res.status(404).json({ message: 'Game not found' });
+    res.json(game);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: 'Failed to Fetch Game' });
+  }
+}
