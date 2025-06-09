@@ -8,15 +8,18 @@ const ensureLoggedIn = require('../middleware/ensureLoggedIn');
 // Protect all defined routes
 // router.use(ensureLoggedIn);
 
+// Public Routes
 // GET /api/games (INDEX action)
 router.get('/', gamesCtrl.index);
-// POST /api/games (CREATE action)
-router.post('/', gamesCtrl.create);
 // GET /api/games/:gameId (SHOW action)
-router.post('/:gameId', gamesCtrl.show);
+router.get('/:gameId', gamesCtrl.show);
+
+// Protected Routes
+// POST /api/games (CREATE action)
+router.post('/', ensureLoggedIn, gamesCtrl.create);
 // PUT /api/games/:gameId (UPDATE action)
-router.post('/:gameId', gamesCtrl.update);
+router.put('/:gameId', ensureLoggedIn, gamesCtrl.update);
 // DELETE /api/games/:gameId  (DELETE action)
-router.post('/:gameId', gamesCtrl.delete);
+router.delete('/:gameId', ensureLoggedIn, gamesCtrl.delete);
 
 module.exports = router;
