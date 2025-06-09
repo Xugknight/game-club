@@ -9,6 +9,7 @@ import LogInPage from '../LogInPage/LogInPage';
 import NavBar from '../../components/NavBar/NavBar';
 import './App.css';
 
+
 export default function App() {
   const [user, setUser] = useState(getUser());
 
