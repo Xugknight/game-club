@@ -1,4 +1,4 @@
-const Post = require('../models/post');
+const Game = require('../models/game');
 
 module.exports = {
   index,
@@ -19,7 +19,7 @@ async function index(req, res) {
 
 async function create(req, res) {
   try {
-    req.body.author = req.user._id;
+    req.body.createdBy = req.user._id;
     const post = await Post.create(req.body);
     res.json(post);
   } catch (err) {
