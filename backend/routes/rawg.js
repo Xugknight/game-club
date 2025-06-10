@@ -4,6 +4,6 @@ const { searchGames } = require('../controllers/rawg');
 const ensureLoggedIn = require('../middleware/ensureLoggedIn');
 
 // GET /api/rawg 
-router.get('/rawg/games', searchGames);
+router.get('/games', searchGames);
 
 module.exports = router;
