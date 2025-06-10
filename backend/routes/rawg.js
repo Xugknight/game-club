@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const { searchGames } = require('../controllers/rawg');
+const ensureLoggedIn = require('../middleware/ensureLoggedIn');
 
-router.get('/rawg/games', async (req, res) => {
-    try {
-        
-    } catch (error) {
-        
-    }
-});
+// GET /api/rawg 
+router.get('/rawg/games', searchGames);
+
+module.exports = router;
