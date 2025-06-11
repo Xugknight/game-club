@@ -23,7 +23,7 @@ export default function NavBar({ user, setUser }) {
           <NavLink to="/games/new">New Game</NavLink>
           &nbsp; | &nbsp;
           <Link to="/" onClick={handleLogOut}>Log Out</Link>
-          <span>Welcome, {user.name}</span>
+          <span>Welcome, {user.username}</span>
         </>
       ) : (
         <>
