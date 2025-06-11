@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import * as postService from '../../services/gameService';
+import * as gameService from '../../services/gameService';
 
-export default function PostListPage() {
-  const [posts, setPosts] = useState([]);
+export default function GameListPage() {
+  const [games, setGames] = useState([]);
 
   useEffect(() => {
     async function fetchPosts() {
-      const posts = await postService.index();
+      const posts = await gameService.index();
       setPosts(posts);
     }
     fetchPosts();

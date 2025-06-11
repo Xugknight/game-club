@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import * as postService from '../../services/gameService';
+import * as gameService from '../../services/gameService';
 
 export default function NewPostPage() {
   const [content, setContent] = useState('');
@@ -12,7 +12,7 @@ export default function NewPostPage() {
     evt.preventDefault();
     try {
       // sendRequest is expecting an object as the payload
-      await postService.create({ content });
+      await gameService.create({ content });
       navigate('/posts');
     } catch (err) {
       setErrorMsg('Adding Post Failed');
