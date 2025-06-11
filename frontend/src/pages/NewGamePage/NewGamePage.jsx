@@ -3,34 +3,85 @@ import { useNavigate } from 'react-router';
 import * as gameService from '../../services/gameService';
 
 export default function NewGamePage() {
-  const [content, setContent] = useState('');
+  const [formData, setFormData] = useState({
+    title: '',
+    developer: '',
+    platform: '',
+    releaseDate: '',
+    coverImageUrl: '',
+    description: '',
+  });
   const [errorMsg, setErrorMsg] = useState('');
-  
   const navigate = useNavigate();
+
+  function handleChange(evt) {
+    setFormData({ ...formData, [evt.target.name]: evt.target.value });
+    setErrorMsg('');
+  };
 
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
       // sendRequest is expecting an object as the payload
-      await gameService.create({ content });
-      navigate('/posts');
+      const newGame = await gameService.createGame(formData);
+      navigate(`/games/${newGame._id}`);
     } catch (err) {
-      setErrorMsg('Adding Post Failed');
+      console.log(err);
+      setErrorMsg('Adding Game Failed');
     }
   }
 
   return (
     <>
-      <h2>Add Post</h2>
+      <h2>Add New Game</h2>
       <form onSubmit={handleSubmit}>
-        <label>Post Content</label>
+        <label>Title</label>
         <input
           type="text"
-          value={content}
-          onChange={(evt) => setContent(evt.target.value)}
+          name='title'
+          value={formData.title}
+          onChange={handleChange}
           required
         />
-        <button type="submit">ADD POST</button>
+        <label>Developer</label>
+        <input
+          type="text"
+          name='developer'
+          value={formData.developer}
+          onChange={handleChange}
+          required
+        />
+        <label>Platform</label>
+        <input
+          type="text"
+          name='platform'
+          value={formData.platform}
+          onChange={handleChange}
+          required
+        />
+        <label>Release Date</label>
+        <input
+          type="date"
+          name='releaseDate'
+          value={formData.releaseDate}
+          onChange={handleChange}
+          required
+        />
+        <label>Cover Image URL</label>
+        <input
+          type="text"
+          name='coverImageUrl'
+          value={formData.coverImageUrl}
+          onChange={handleChange}
+          required
+        />
+        <label>Description</label>
+        <textarea
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+        />
+        <button type="submit">ADD GAME</button>
       </form>
       <p className="error-message">&nbsp;{errorMsg}</p>
     </>
