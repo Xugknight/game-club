@@ -6,7 +6,7 @@ export default function GameCard({ game }) {
         <div className='game-card'>
             <Link to={`/games/${game._id}`} className='game-card__link'>
                 <img 
-                    src="game.coverImageUrl" 
+                    src={game.coverImageUrl} 
                     alt={`Cover image for ${game.title}`} 
                     className='game-card__image'
                 />
