@@ -6,3 +6,11 @@ export function searchRawgGames(search, page = 1) {
             return res.json();
         });
 };
+
+export function getTrendingGames(page =1) {
+    return fetch(`/api/rawg/games?page=${page}`)
+    .then(res => {
+        if (!res.ok) throw new Error(res.statusText);
+        return res.json();
+    });
+};

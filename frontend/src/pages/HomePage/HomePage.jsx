@@ -1,10 +1,12 @@
 import RawgSearch from "../../components/RawgSearch/RawgSearch";
+import TrendingGames from "../../components/TrendingGames/TrendingGames";
 
 export default function HomePage() {
   return (
     <div>
       <h1>Home Page</h1>
-      <p> Test display for Rawg</p>
+      <TrendingGames />
+      <hr />
       <RawgSearch />
     </div>
   );
