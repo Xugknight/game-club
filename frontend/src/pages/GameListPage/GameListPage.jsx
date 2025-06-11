@@ -5,22 +5,22 @@ export default function GameListPage() {
   const [games, setGames] = useState([]);
 
   useEffect(() => {
-    async function fetchPosts() {
-      const posts = await gameService.index();
-      setPosts(posts);
+    async function fetchGames() {
+      const gamesData = await gameService.index();
+      setGames(gamesData);
     }
-    fetchPosts();
+    fetchGames();
   }, []);
 
   return (
     <>
-      <h1>Post List</h1>
-      {posts.length ? 
+      <h1>Game List</h1>
+      {games.length ? 
         <ul>
-          {posts.map((post) => <li key={post._id}>{post.content}</li>)}
+          {games.map((game) => <li key={game._id}>{game.title}</li>)}
         </ul>
         :
-        <p>No Posts Yet!</p>
+        <p>No Games Yet!</p>
       }
     </>
   );
