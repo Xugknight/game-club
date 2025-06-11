@@ -15,4 +15,32 @@ async function searchGames(req, res) {
     }
 };
 
-module.exports = { searchGames };
+function formatDate(d) {
+  return d.toISOString().split('T')[0];
+}
+
+async function trendingGames(req, res) {
+    try {
+        const { page =1 } = req.query;
+        const today     = new Date();
+        const last90 = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000);
+        const datesParam = `${formatDate(last90)},${formatDate(today)}`;
+        const url =
+        `${BASE_URL}` + 
+        `?key=${KEY}` + 
+        `&dates=${datesParam}` + 
+        `&ordering=-added` + 
+        `&page=${page}` + 
+        `&page_size=20`;
+
+        const apiRes = await fetch(url);
+        if (!apiRes.ok) throw new Error(apiRes.statusText);
+        const data = await apiRes.json();
+        return res.json(data);
+    } catch (err) {
+        console.log('RAWG Trending error: ', err);
+        res.status(502).json({ message: 'Failed to Fetch Trending from RAWG' });
+    }
+};
+
+module.exports = { searchGames, trendingGames };

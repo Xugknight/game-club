@@ -8,7 +8,7 @@ export function searchRawgGames(search, page = 1) {
 };
 
 export function getTrendingGames(page =1) {
-    return fetch(`/api/rawg/games?page=${page}`)
+    return fetch(`/api/rawg/games/trending?page=${page}`)
     .then(res => {
         if (!res.ok) throw new Error(res.statusText);
         return res.json();
