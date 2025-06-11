@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import * as gameService from '../../services/gameService';
 
-export default function NewPostPage() {
+export default function NewGamePage() {
   const [content, setContent] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   
