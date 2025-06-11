@@ -19,11 +19,11 @@ export default function TrendingGames() {
                     const cardGame = {
                         _id: rawgGame.id,
                         title: rawgGame.name,
-                        coverImageUrl: rawgGame.background_image || rawgGame.background_image_additional || 'https://via.placeholder.com/200x120?text=No+Image',
+                        coverImageUrl: rawgGame.background_image,
                         developer: rawgGame.genres?.[0]?.name || '—',
                         releaseDate: rawgGame.released
                     };
-                     console.log('cardGame.coverImageUrl →', cardGame.coverImageUrl);
+                    
                     return <GameCard key={rawgGame.id} game={cardGame} />;
                 })}
             </div>
