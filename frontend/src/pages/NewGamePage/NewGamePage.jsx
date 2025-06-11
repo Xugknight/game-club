@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import * as postService from '../../services/postService';
+import * as postService from '../../services/gameService';
 
 export default function NewPostPage() {
   const [content, setContent] = useState('');
