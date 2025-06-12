@@ -47,6 +47,7 @@ async function seed() {
             const d = await detailRes.json();
 
             const gameData = {
+                rawgId: d.id,
                 title: d.name,
                 developer: d.developers?.map(dev => dev.name).join(', ') || 'Unknown',
                 platform: d.platforms?.[0]?.platform?.name || 'Unknown',
@@ -57,7 +58,7 @@ async function seed() {
             };
 
             await Game.findOneAndUpdate(
-                { title: gameData.title, releaseDate: gameData.releaseDate },
+                { rawgId: d.id },
                 gameData,
                 { upsert: true, new: true }
             );

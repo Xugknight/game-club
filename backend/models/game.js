@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const gameSchema = new Schema(
   {
+    rawgId: { type: Number, unique: true, sparse: true },
     title: { type: String, required: true },
     developer: String,
     platform: String,

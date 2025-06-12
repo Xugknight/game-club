@@ -1,38 +1,39 @@
 import { useEffect, useState } from "react";
 import { getTrendingGames } from "../../services/rawgService";
+import * as gameService from '../../services/gameService';
 import GameCard from "../GameCard/GameCard";
 
 export default function TrendingGames() {
-    const [games, setGames] = useState([]);
+  const [cards, setCards] = useState([]);
 
-    useEffect(() => {
-        async function fetchTrending() {
-            try {
-                const data = await getTrendingGames();
-                setGames(data.results || []);
-            } catch (err) {
-                console.log('Error loading trending games:', err);
-            }
-        }
-        fetchTrending();
-    }, []);
+  useEffect(() => {
+    async function load() {
+      try {
+        const { results: rawgResults = [] } = await getTrendingGames();
+        const localGames = await gameService.index();
+        const byRawgId = {};
+        localGames.forEach(game => {
+          if (game.rawgId != null) byRawgId[game.rawgId] = game;
+        });
+        const matched = rawgResults
+          .map(rg => byRawgId[rg.id])
+          .filter(Boolean);
+        setCards(matched);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    load();
+  }, []);
 
-    return (
-        <section>
-            <h2>Recent Releases</h2>
-            <div className="game-grid">
-                {games.map(rawgGame => {
-                    const cardGame = {
-                        _id: rawgGame.id,
-                        title: rawgGame.name,
-                        coverImageUrl: rawgGame.background_image,
-                        developer: rawgGame.genres?.[0]?.name || '—',
-                        releaseDate: rawgGame.released
-                    };
-
-                    return <GameCard key={rawgGame.id} game={cardGame} />;
-                })}
-            </div>
-        </section>
-    );
-};
+  return (
+    <section>
+      <h2>Recent Releases</h2>
+      <div className="game-grid">
+        {cards.map(game => (
+          <GameCard key={game._id} game={game} />
+        ))}
+      </div>
+    </section>
+  );
+}
