@@ -6,9 +6,15 @@ export default function TrendingGames() {
     const [games, setGames] = useState([]);
 
     useEffect(() => {
-        getTrendingGames()
-            .then(data => setGames(data.results || []))
-            .catch(console.error);
+        async function fetchTrending() {
+            try {
+                const data = await getTrendingGames();
+                setGames(data.results || []);
+            } catch (err) {
+                console.log('Error loading trending games:', err);
+            }
+        }
+        fetchTrending();
     }, []);
 
     return (
@@ -23,7 +29,7 @@ export default function TrendingGames() {
                         developer: rawgGame.genres?.[0]?.name || '—',
                         releaseDate: rawgGame.released
                     };
-                    
+
                     return <GameCard key={rawgGame.id} game={cardGame} />;
                 })}
             </div>
