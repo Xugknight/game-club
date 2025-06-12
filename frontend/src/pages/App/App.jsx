@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router';
 import { getUser } from '../../services/authService';
 import HomePage from '../HomePage/HomePage';
 import GameListPage from '../GameListPage/GameListPage';
+import GameDetail from '../GameDetail/GameDetail';
 import NewGamePage from '../NewGamePage/NewGamePage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LogInPage from '../LogInPage/LogInPage';
@@ -21,12 +22,15 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/games" element={<GameListPage />} />
+            <Route path="/games/:gameId" element={<GameDetail />} />
             <Route path="/games/new" element={<NewGamePage />} />
             <Route path="*" element={null} />
           </Routes>
         ) : (
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/games" element={<GameListPage />} />
+            <Route path="/games/:gameId" element={<GameDetail />} />
             <Route path="/signup" element={<SignUpPage setUser={setUser} />} />
             <Route path="/login" element={<LogInPage setUser={setUser} />} />
             <Route path="*" element={null} />
