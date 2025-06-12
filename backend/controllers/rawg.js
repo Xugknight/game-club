@@ -15,8 +15,8 @@ async function searchGames(req, res) {
     }
 };
 
-function formatDate(d) {
-  return d.toISOString().split('T')[0];
+function formatDate(date) {
+  return date.toISOString().split('T')[0];
 }
 
 async function trendingGames(req, res) {

@@ -6,8 +6,8 @@ const User = require('../models/user');
 const RAWG_KEY = process.env.RAWG_API_KEY;
 const MONGO_URI = process.env.MONGODB_URI;
 
-function formatDate(d) {
-    return d.toISOString().split('T')[0];
+function formatDate(date) {
+    return date.toISOString().split('T')[0];
 }
 
 async function seed() {
@@ -29,9 +29,9 @@ async function seed() {
         }
 
         const today = new Date();
-        const ninetyAgo = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000);
-        const dates = `${formatDate(ninetyAgo)},${formatDate(today)}`;
-        const listUrl = `https://api.rawg.io/api/games?key=${RAWG_KEY}` + `&dates=${dates}&ordering=-added&page_size=20`;
+        const daysToPull = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000);
+        const dates = `${formatDate(daysToPull)},${formatDate(today)}`;
+        const listUrl = `https://api.rawg.io/api/games?key=${RAWG_KEY}` + `&dates=${dates}&ordering=-added&page_size=40`;
         const listRes = await fetch(listUrl);
         const listData = await listRes.json();
         const summaries = listData.results;
