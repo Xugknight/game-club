@@ -10,7 +10,7 @@ export default function ReviewList({ reviews, onEdit, onDelete }) {
                         <strong>{review.reviewer.username}</strong> rated {review.rating}/5
                     </p>
                     <p>{review.content}</p>
-                    {currentUser?.id === review.reviewer._id.toString() && (
+                    {currentUser?._id === review.reviewer._id.toString() && (
                         <div>
                             <button onClick={() => onEdit(review)}>EDIT</button>
                             <button onClick={() => onDelete(review._id)}>DELETE</button>
