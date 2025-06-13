@@ -41,24 +41,11 @@ async function show(req, res) {
 
 async function create(req, res) {
   try {
-    if (req.body.rawgId) {
-      const exists = await Game.findOne({ rawgId: req.body.rawgId });
-      if (exists) return res.status(409).json({ message: 'Game Already Exists' });
-    }
-    const dupe = await Game.findOne({
-      title:       req.body.title,
-      releaseDate: req.body.releaseDate
-    });
-    if (dupe) return res.status(409).json({ message: 'Game Already Exists' });
-
     req.body.createdBy = req.user._id;
     const game = await Game.create(req.body);
     res.status(201).json(game);
   } catch (err) {
     console.log(err);
-    if (err.code === 11000) {
-      return res.status(409).json({ message: 'Duplicate Key'})
-    }
     res.status(400).json({ message: 'Failed to Create Game' });
   }
 }
