@@ -10,18 +10,10 @@ module.exports = {
 
 async function index(req, res) {
   try {
-    const page = Math.max(1, parseInt(req.query.page, 10) || 1);
-    const pageLimit = Math.max(1, Math.min(100, parseInt(req.query.limit, 10) || 20));
-    const skip = (page - 1) * pageLimit;
+    const games = await Game.find({});
     // Below would return all posts for just the logged in user
     // const posts = await Post.find({author: req.user._id});
-
-    const [ total, games ] = await Promise.all([
-      Game.countDocuments({}),
-      Game.find({}).sort({ createdAt: -1 }).skip(skip).limit(pageLimit)
-    ]);
-    const totalPages = Math.ceil(total / pageLimit);
-    res.json({ games, page, totalPages, total });
+    res.json(games);
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: 'Failed to Fetch Games' });
@@ -41,11 +33,24 @@ async function show(req, res) {
 
 async function create(req, res) {
   try {
+    if (req.body.rawgId) {
+      const exists = await Game.findOne({ rawgId: req.body.rawgId });
+      if (exists) return res.status(409).json({ message: 'Game Already Exists' });
+    }
+    const dupe = await Game.findOne({
+      title:       req.body.title,
+      releaseDate: req.body.releaseDate
+    });
+    if (dupe) return res.status(409).json({ message: 'Game Already Exists' });
+
     req.body.createdBy = req.user._id;
     const game = await Game.create(req.body);
     res.status(201).json(game);
   } catch (err) {
     console.log(err);
+    if (err.code === 11000) {
+      return res.status(409).json({ message: 'Duplicate Key'})
+    }
     res.status(400).json({ message: 'Failed to Create Game' });
   }
 }
