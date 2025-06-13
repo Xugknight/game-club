@@ -10,10 +10,18 @@ module.exports = {
 
 async function index(req, res) {
   try {
-    const games = await Game.find({});
+    const page = Math.max(1, parseInt(req.query.page, 10) || 1);
+    const pageLimit = Math.max(1, Math.min(100, parseInt(req.query.limit, 10) || 20));
+    const skip = (page - 1) * pageLimit;
     // Below would return all posts for just the logged in user
     // const posts = await Post.find({author: req.user._id});
-    res.json(games);
+
+    const [ total, games ] = await Promise.all([
+      Game.countDocuments({}),
+      Game.find({}).sort({ createdAt: -1 }).skip(skip).limit(pageLimit)
+    ]);
+    const totalPages = Math.ceil(total / pageLimit);
+    res.json({ games, page, totalPages, total });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: 'Failed to Fetch Games' });
