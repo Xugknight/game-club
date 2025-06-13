@@ -27,6 +27,10 @@ export default function NavBar({ user, setUser }) {
         </>
       ) : (
         <>
+          <NavLink to="/games" end>
+            Games
+          </NavLink>
+          &nbsp; | &nbsp;
           <NavLink to="/login">Log In</NavLink>
           &nbsp; | &nbsp;
           <NavLink to="/signup">Sign Up</NavLink>
