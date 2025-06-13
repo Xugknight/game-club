@@ -17,4 +17,6 @@ const gameSchema = new Schema(
   }
 );
 
+gameSchema.index({ title: 1, releaseDate: 1 }, { unique: true, sparse: true });
+
 module.exports = mongoose.model('Game', gameSchema);

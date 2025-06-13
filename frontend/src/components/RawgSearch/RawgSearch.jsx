@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { searchRawgGames } from '../../services/rawgService';
+import { importFromRawg } from '../../services/gameService';
+import { useNavigate } from 'react-router';
 
 export default function RawgSearch() {
   const [query, setQuery]     = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError]     = useState(null);
+  const navigate = useNavigate();
 
   async function handleSubmit(evt) {
     evt.preventDefault();
@@ -18,6 +21,15 @@ export default function RawgSearch() {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  async function handleImport(rawgId) {
+    try {
+      const newGame = await importFromRawg(rawgId);
+      navigate(`/games/${newGame._id}`);
+    } catch (err) {
+      console.log('Import Failed', err)
     }
   };
 
@@ -40,9 +52,12 @@ export default function RawgSearch() {
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
       <ul>
-        {results.map(game => (
-          <li key={game.id}>
-            <strong>{game.name}</strong> ({game.released})
+        {results.map((game) => (
+          <li key={game.id} style={{ marginBottom: '0.5rem' }}>
+            <strong>{game.name}</strong> ({game.released}){' '}
+            <button onClick={() => handleImport(game.id)}>
+              Add to Library
+            </button>
           </li>
         ))}
       </ul>

@@ -21,3 +21,7 @@ export async function updateGame(id, gameData) {
 export async function deleteGame(id) {
   return sendRequest(`${BASE_URL}/${id}`, 'DELETE');
 };
+
+export async function importFromRawg(rawgId) {
+  return await sendRequest(`/api/rawg/games/${rawgId}/import`, 'POST');
+};
