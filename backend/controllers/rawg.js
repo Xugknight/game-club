@@ -1,5 +1,6 @@
 const BASE_URL = 'https://api.rawg.io/api/games';
 const KEY = process.env.RAWG_API_KEY;
+const Game = require('../models/game');
 
 async function searchGames(req, res) {
     try {
