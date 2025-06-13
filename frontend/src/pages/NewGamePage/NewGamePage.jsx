@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import * as gameService from '../../services/gameService';
+import RawgSearch from '../../components/RawgSearch/RawgSearch';
 
 export default function NewGamePage() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ export default function NewGamePage() {
     coverImageUrl: '',
     description: '',
   });
+  const [useManual, setUseManual] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
 
@@ -22,7 +24,6 @@ export default function NewGamePage() {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      // sendRequest is expecting an object as the payload
       const newGame = await gameService.createGame(formData);
       navigate(`/games/${newGame._id}`);
     } catch (err) {
@@ -34,55 +35,77 @@ export default function NewGamePage() {
   return (
     <>
       <h2>Add New Game</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Title</label>
-        <input
-          type="text"
-          name='title'
-          value={formData.title}
-          onChange={handleChange}
-          required
-        />
-        <label>Developer</label>
-        <input
-          type="text"
-          name='developer'
-          value={formData.developer}
-          onChange={handleChange}
-          required
-        />
-        <label>Platform</label>
-        <input
-          type="text"
-          name='platform'
-          value={formData.platform}
-          onChange={handleChange}
-          required
-        />
-        <label>Release Date</label>
-        <input
-          type="date"
-          name='releaseDate'
-          value={formData.releaseDate}
-          onChange={handleChange}
-          required
-        />
-        <label>Cover Image URL</label>
-        <input
-          type="text"
-          name='coverImageUrl'
-          value={formData.coverImageUrl}
-          onChange={handleChange}
-          required
-        />
-        <label>Description</label>
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-        />
-        <button type="submit">ADD GAME</button>
-      </form>
+
+      {!useManual && (
+        <>
+          <RawgSearch />
+          <button
+            style={{ margin: '1rem 0' }}
+            onClick={() => setUseManual(true)}
+          >
+            Add Manually
+          </button>
+        </>
+      )}
+      {useManual && (
+        <>
+          <button
+            style={{ marginBottom: '1rem' }}
+            onClick={() => setUseManual(false)}
+          >
+          Back to Import
+          </button>
+          <form onSubmit={handleSubmit}>
+            <label>Title</label>
+            <input
+              type="text"
+              name='title'
+              value={formData.title}
+              onChange={handleChange}
+              required
+            />
+            <label>Developer</label>
+            <input
+              type="text"
+              name='developer'
+              value={formData.developer}
+              onChange={handleChange}
+              required
+            />
+            <label>Platform</label>
+            <input
+              type="text"
+              name='platform'
+              value={formData.platform}
+              onChange={handleChange}
+              required
+            />
+            <label>Release Date</label>
+            <input
+              type="date"
+              name='releaseDate'
+              value={formData.releaseDate}
+              onChange={handleChange}
+              required
+            />
+            <label>Cover Image URL</label>
+            <input
+              type="text"
+              name='coverImageUrl'
+              value={formData.coverImageUrl}
+              onChange={handleChange}
+              required
+            />
+            <label>Description</label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+            />
+            <button type="submit">Add Game</button>
+          </form>
+        </>
+      )}
       <p className="error-message">&nbsp;{errorMsg}</p>
     </>
   );

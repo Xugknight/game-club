@@ -37,7 +37,7 @@ export default function RawgSearch() {
 
   return (
     <div>
-      <h2>Search Games</h2>
+      <h2>Import Game</h2>
       <form onSubmit={handleSubmit} style={{ marginBottom: '1rem' }}>
         <input
           type="text"
@@ -47,7 +47,7 @@ export default function RawgSearch() {
           required
         />
         <button type="submit" disabled={loading}>
-          {loading ? 'Searching…' : 'Search'}
+          {loading ? 'Searching…' : 'Import'}
         </button>
       </form>
 
