@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { searchRawgGames } from '../../services/rawgService';
 import { importFromRawg } from '../../services/gameService';
+import { getUser } from '../../services/authService';
 import { useNavigate } from 'react-router';
 
 export default function RawgSearch() {
@@ -9,6 +10,7 @@ export default function RawgSearch() {
   const [loading, setLoading] = useState(false);
   const [error, setError]     = useState(null);
   const navigate = useNavigate();
+  const user = getUser();
 
   async function handleSubmit(evt) {
     evt.preventDefault();
@@ -55,12 +57,19 @@ export default function RawgSearch() {
         {results.map((game) => (
           <li key={game.id} style={{ marginBottom: '0.5rem' }}>
             <strong>{game.name}</strong> ({game.released}){' '}
-            <button onClick={() => handleImport(game.id)}>
+            {user && (
+              <button onClick={() => handleImport(game.id)}>
               Add to Library
-            </button>
+              </button>
+            )}
           </li>
         ))}
       </ul>
+      {!user && (
+        <p style={{ fontStyle: 'italic', marginTop: '1rem' }}>
+          Log In to Add Games!
+        </p>
+      )}
     </div>
   );
 }
