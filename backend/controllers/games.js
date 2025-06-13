@@ -15,7 +15,7 @@ async function index(req, res) {
     // const posts = await Post.find({author: req.user._id});
     res.json(games);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({ message: 'Failed to Fetch Games' });
   }
 }
@@ -26,7 +26,7 @@ async function show(req, res) {
     if (!game) return res.status(404).json({ message: 'Game not found' });
     res.json(game);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).json({ message: 'Failed to Fetch Game' });
   }
 }
@@ -47,7 +47,7 @@ async function create(req, res) {
     const game = await Game.create(req.body);
     res.status(201).json(game);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     if (err.code === 11000) {
       return res.status(409).json({ message: 'Duplicate Key'})
     }
@@ -64,7 +64,7 @@ async function update(req, res) {
     await game.save();
     res.json(game);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).json({ message: 'Failed to Update Game' });
   }
 }
@@ -77,7 +77,7 @@ async function deleteGame(req, res) {
     await game.deleteOne();
     res.json({ message: 'Game Deleted' });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).json({ message: 'Failed to Update Game' });
   }
 }

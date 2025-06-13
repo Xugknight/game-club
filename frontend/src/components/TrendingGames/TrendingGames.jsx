@@ -20,7 +20,7 @@ export default function TrendingGames() {
           .filter(Boolean);
         setCards(matched);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
     load();

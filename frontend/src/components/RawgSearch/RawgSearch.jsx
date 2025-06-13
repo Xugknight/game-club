@@ -29,7 +29,7 @@ export default function RawgSearch() {
       const newGame = await importFromRawg(rawgId);
       navigate(`/games/${newGame._id}`);
     } catch (err) {
-      console.log('Import Failed', err)
+      console.error('Import Failed', err)
     }
   };
 

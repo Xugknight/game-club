@@ -26,7 +26,7 @@ export default function NewGamePage() {
       const newGame = await gameService.createGame(formData);
       navigate(`/games/${newGame._id}`);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setErrorMsg('Adding Game Failed');
     }
   }

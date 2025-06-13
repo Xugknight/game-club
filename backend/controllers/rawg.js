@@ -10,7 +10,7 @@ async function searchGames(req, res) {
         const data = await apiRes.json();
         res.json(data);
     } catch (err) {
-        console.log('RAWG error: ', err);
+        console.error('RAWG error: ', err);
         res.status(502).json({ message: 'Failed to Fetch from RAWG' });
     }
 };
@@ -38,9 +38,37 @@ async function trendingGames(req, res) {
         const data = await apiRes.json();
         return res.json(data);
     } catch (err) {
-        console.log('RAWG Trending error: ', err);
+        console.error('RAWG Trending error: ', err);
         res.status(502).json({ message: 'Failed to Fetch Trending from RAWG' });
     }
 };
 
-module.exports = { searchGames, trendingGames };
+async function importGame(req, res) {
+    try {
+        const rawgId = Number(req.params.rawgId);
+        let game = await Game.findOne({ rawgId });
+        if (game) return res.json(game);
+
+        const detailRes = await fetch(`${BASE_URL}/${rawgId}?key=${KEY}`);
+        const gameDetails = await detailRes.json();
+
+        const gameData = {
+            rawgId: gameDetails.id,
+            title: gameDetails.name,
+            developer: gameDetails.developers?.map(dev => dev.name).join(', ') || 'Unknown',
+            platform: gameDetails.platforms?.[0]?.platform?.name || 'Unknown',
+            releaseDate: gameDetails.released,
+            coverImageUrl: gameDetails.background_image || '',
+            description: gameDetails.description_raw || '',
+            createdBy: req.user._id
+        };
+
+        game = await Game.create(gameData);
+        res.status(201).json(game);
+    } catch (err) {
+        console.error('RAWG Import Error:', err);
+        res.status(502).json({ message: 'Failed to Import Game from RAWG' });
+    }
+};
+
+module.exports = { searchGames, trendingGames, importGame };

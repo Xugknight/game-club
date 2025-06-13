@@ -7,6 +7,8 @@ const User     = require('../models/user');
 const RAWG_KEY = process.env.RAWG_API_KEY;
 const MONGO_URI= process.env.MONGODB_URI;
 
+// node backend/scripts/seed.js  <---run this in terminal
+
 function formatDate(date) {
   return date.toISOString().split('T')[0];
 }

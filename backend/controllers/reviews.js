@@ -14,7 +14,7 @@ async function index(req, res) {
     // const posts = await Post.find({author: req.user._id});
     res.json(reviews);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({ message: 'Failed to Fetch Reviews' });
   }
 }
@@ -26,7 +26,7 @@ async function create(req, res) {
     const review = await Review.create(req.body);
     res.json(review);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).json({ message: 'Failed to Create Review' });
   }
 }
@@ -40,7 +40,7 @@ async function update(req, res) {
     await review.save();
     res.json(review);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).json({ message: 'Failed to Update Review' });
   }
 }
@@ -53,7 +53,7 @@ async function deleteReview(req, res) {
     await review.deleteOne();
     res.json({ message: 'Review Deleted' });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(400).json({ message: 'Failed to Delete Review' });
   }
 }

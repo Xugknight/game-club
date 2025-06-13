@@ -33,7 +33,7 @@ export default function ReviewForm({
             }
             onSuccess();
         } catch (err) {
-            console.log(err);
+            console.error(err);
             setError('Failed to Submit Review.');
         }
     };

@@ -20,7 +20,7 @@ export default function GameDetail() {
             const data = await reviewService.getReviews(gameId);
             setReviews(data);
         } catch (err) {
-            console.log('Failed to Load Reviews', err);
+            console.error('Failed to Load Reviews', err);
         }
     };
 
@@ -32,7 +32,7 @@ export default function GameDetail() {
                 setGame(gameData);
                 setReviews(reviewdata);
             } catch (err) {
-                console.log('Failed to Load Game or Reviews', err);
+                console.error('Failed to Load Game or Reviews', err);
             }
         };
         fetchGameAndReviews();
