@@ -65,11 +65,6 @@ export default function RawgSearch() {
           </li>
         ))}
       </ul>
-      {!user && (
-        <p style={{ fontStyle: 'italic', marginTop: '1rem' }}>
-          Log In to Add Games!
-        </p>
-      )}
     </div>
   );
 }
