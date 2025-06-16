@@ -25,3 +25,7 @@ export async function deleteGame(id) {
 export async function importFromRawg(rawgId) {
   return await sendRequest(`/api/rawg/games/${rawgId}/import`, 'POST');
 };
+
+export function flagGame(gameId, reason) {
+  return sendRequest(`/api/flags/games/${gameId}`, 'POST', { reason });
+}

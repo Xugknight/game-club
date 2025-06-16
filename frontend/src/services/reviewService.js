@@ -21,3 +21,7 @@ export async function deleteReview(gameId, reviewId,) {
     // DELETE /api/games/:gameId/reviews/:reviewId
     return await sendRequest(`${BASE_URL}/${gameId}/reviews/${reviewId}`, 'DELETE');
 };
+
+export function flagReview(gameId, reviewId, reason) {
+  return sendRequest(`/api/flags/reviews/${reviewId}`, 'POST', { reason });
+}

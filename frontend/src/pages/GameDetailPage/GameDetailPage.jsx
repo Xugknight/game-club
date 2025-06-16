@@ -8,45 +8,54 @@ import ReviewForm from "../../components/ReviewForm/ReviewForm";
 import { getUser } from "../../services/authService";
 
 export default function GameDetail() {
-    const { gameId } = useParams();
-    const currentUser = getUser();
-    const [game, setGame] = useState(null);
-    const [reviews, setReviews] = useState([]);
-    const [showForm, setShowForm] = useState(false);
-    const [editingReview, setEditingReview] = useState(null);
+  const { gameId } = useParams();
+  const currentUser = getUser();
+  const [game, setGame] = useState(null);
+  const [reviews, setReviews] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [editingReview, setEditingReview] = useState(null);
 
-    async function loadReviews() {
-        try {
-            const data = await reviewService.getReviews(gameId);
-            setReviews(data);
-        } catch (err) {
-            console.error('Failed to Load Reviews', err);
-        }
+  async function loadReviews() {
+    try {
+      const data = await reviewService.getReviews(gameId);
+      setReviews(data);
+    } catch (err) {
+      console.error('Failed to Load Reviews', err);
+    }
+  };
+
+  useEffect(() => {
+    async function fetchGameAndReviews() {
+      try {
+        const gameData = await gameService.show(gameId);
+        const reviewdata = await reviewService.getReviews(gameId);
+        setGame(gameData);
+        setReviews(reviewdata);
+      } catch (err) {
+        console.error('Failed to Load Game or Reviews', err);
+      }
     };
+    fetchGameAndReviews();
+  }, [gameId]);
 
-    useEffect(() => {
-        async function fetchGameAndReviews() {
-            try {
-                const gameData = await gameService.show(gameId);
-                const reviewdata = await reviewService.getReviews(gameId);
-                setGame(gameData);
-                setReviews(reviewdata);
-            } catch (err) {
-                console.error('Failed to Load Game or Reviews', err);
-            }
-        };
-        fetchGameAndReviews();
-    }, [gameId]);
+  if (!game) return <p>Loading Game Details...</p>;
 
-    if (!game) return <p>Loading Game Details...</p>;
-
-    return (
-        <div>
+  return (
+    <div>
       <GameCard game={game} />
 
       <section style={{ padding: '1rem' }}>
         <h2>About:</h2>
         <p>{game.description}</p>
+        
+        {currentUser && (
+          <button onClick={async () => {
+            await gameService.flagGame(gameId, 'Delete Request');
+            alert('Delete Request Successful');
+          }}>
+            Delete Request
+          </button>
+        )}
 
         <h3>Reviews</h3>
 

@@ -26,6 +26,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/games', require('./routes/games'));
 app.use('/api', require('./routes/reviews'));
 app.use('/api/rawg', require('./routes/rawg'));
+app.use('/api/flags', require('./routes/flags'));
 
 
 // Use a "catch-all" route to deliver the frontend's production index.html
