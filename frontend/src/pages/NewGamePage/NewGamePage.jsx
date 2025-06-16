@@ -109,4 +109,4 @@ export default function NewGamePage() {
       <p className="error-message">&nbsp;{errorMsg}</p>
     </>
   );
-}
+};

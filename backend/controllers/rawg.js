@@ -2,6 +2,12 @@ const BASE_URL = 'https://api.rawg.io/api/games';
 const KEY = process.env.RAWG_API_KEY;
 const Game = require('../models/game');
 
+module.exports = {
+    searchGames,
+    trendingGames,
+    importGame
+};
+
 async function searchGames(req, res) {
     try {
         const { search = '', page = 1 } = req.query;
@@ -17,22 +23,22 @@ async function searchGames(req, res) {
 };
 
 function formatDate(date) {
-  return date.toISOString().split('T')[0];
-}
+    return date.toISOString().split('T')[0];
+};
 
 async function trendingGames(req, res) {
     try {
-        const { page =1 } = req.query;
-        const today     = new Date();
+        const { page = 1 } = req.query;
+        const today = new Date();
         const last90 = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000);
         const datesParam = `${formatDate(last90)},${formatDate(today)}`;
         const url =
-        `${BASE_URL}` + 
-        `?key=${KEY}` + 
-        `&dates=${datesParam}` + 
-        `&ordering=-added` + 
-        `&page=${page}` + 
-        `&page_size=20`;
+            `${BASE_URL}` +
+            `?key=${KEY}` +
+            `&dates=${datesParam}` +
+            `&ordering=-added` +
+            `&page=${page}` +
+            `&page_size=20`;
 
         const apiRes = await fetch(url);
         if (!apiRes.ok) throw new Error(apiRes.statusText);
@@ -71,5 +77,3 @@ async function importGame(req, res) {
         res.status(502).json({ message: 'Failed to Import Game from RAWG' });
     }
 };
-
-module.exports = { searchGames, trendingGames, importGame };

@@ -53,4 +53,4 @@ export default function LogInPage({ setUser }) {
       <p className="error-message">&nbsp;{errorMsg}</p>
     </>
   );
-}
+};

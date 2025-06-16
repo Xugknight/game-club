@@ -7,7 +7,7 @@ export default function NavBar({ user, setUser }) {
   function handleLogOut() {
     logOut();
     setUser(null);
-  }
+  };
 
   return (
     <nav className="NavBar">
@@ -20,6 +20,12 @@ export default function NavBar({ user, setUser }) {
           </NavLink>
           &nbsp; | &nbsp;
           <NavLink to="/games/new">Add Game</NavLink>
+          {user.isAdmin && (
+            <>
+              &nbsp;|&nbsp;
+              <NavLink to="/admin">Admin</NavLink>
+            </>
+          )}
           &nbsp; | &nbsp;
           <Link to="/" onClick={handleLogOut}>Log Out</Link>
           <span>Welcome, {user.username}</span>
@@ -37,4 +43,4 @@ export default function NavBar({ user, setUser }) {
       )}
     </nav>
   );
-}
+};

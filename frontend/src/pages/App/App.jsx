@@ -7,6 +7,7 @@ import GameDetailPage from '../GameDetailPage/GameDetailPage';
 import NewGamePage from '../NewGamePage/NewGamePage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LogInPage from '../LogInPage/LogInPage';
+import AdminPage from '../AdminPage/AdminPage';
 import NavBar from '../../components/NavBar/NavBar';
 import ProtectedRoute from '../../components/ProtectedRoute/ProtectedRoute';
 import './App.css';
@@ -31,6 +32,15 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <NewGamePage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute redirectTo="/">
+                <AdminPage />
               </ProtectedRoute>
             }
           />

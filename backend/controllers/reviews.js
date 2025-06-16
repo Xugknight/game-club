@@ -10,14 +10,12 @@ module.exports = {
 async function index(req, res) {
   try {
     const reviews = await Review.find({ game: req.params.gameId }).populate('reviewer', 'username');
-    // Below would return all posts for just the logged in user
-    // const posts = await Post.find({author: req.user._id});
     res.json(reviews);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Failed to Fetch Reviews' });
   }
-}
+};
 
 async function create(req, res) {
   try {
@@ -29,7 +27,7 @@ async function create(req, res) {
     console.error(err);
     res.status(400).json({ message: 'Failed to Create Review' });
   }
-}
+};
 
 async function update(req, res) {
   try {
@@ -45,7 +43,7 @@ async function update(req, res) {
     console.error(err);
     res.status(400).json({ message: 'Failed to Update Review' });
   }
-}
+};
 
 async function deleteReview(req, res) {
   try {
@@ -60,5 +58,4 @@ async function deleteReview(req, res) {
     console.error(err);
     res.status(400).json({ message: 'Failed to Delete Review' });
   }
-}
-
+};

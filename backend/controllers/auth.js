@@ -19,7 +19,7 @@ async function logIn(req, res) {
     console.log(err);
     res.status(400).json({ message: 'Bad Credentials' });
   }
-}
+};
 
 async function signUp(req, res) {
   try {
@@ -30,7 +30,7 @@ async function signUp(req, res) {
     console.log(err);
     res.status(400).json({ message: 'Duplicate Email' });
   }
-}
+};
 
 /*--- Helper Functions ---*/
 
@@ -41,4 +41,4 @@ function createJWT(user) {
     process.env.SECRET,
     { expiresIn: '24h' }
   );
-}
+};

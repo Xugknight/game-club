@@ -6,18 +6,18 @@ export async function signUp(userData) {
   const token = await sendRequest(BASE_URL + '/signup', 'POST', userData);
   localStorage.setItem('token', token);
   return getUser();
-}
+};
 
 export async function logIn(credentials) {
   const token = await sendRequest(`${BASE_URL}/login`, 'POST', credentials);
   localStorage.setItem('token', token);
   return getUser();
-}
+};
 
 export function getUser() {
   const token = getToken();
   return token ? JSON.parse(atob(token.split('.')[1])).user : null;
-}
+};
 
 export function getToken() {
   // getItem returns null if there's no key
@@ -30,8 +30,8 @@ export function getToken() {
     return null;
   }
   return token;
-}
+};
 
 export function logOut() {
   localStorage.removeItem('token');
-}
+};

@@ -17,7 +17,7 @@ export default function SignUpPage({ setUser }) {
   function handleChange(evt) {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
     setErrorMsg('');
-  }
+  };
 
   async function handleSubmit(evt) {
     evt.preventDefault();
@@ -28,7 +28,7 @@ export default function SignUpPage({ setUser }) {
     } catch (err) {
       setErrorMsg('Sign Up Failed - Try Again');
     }
-  }
+  };
 
   const disable = formData.password !== formData.confirm;
 
@@ -75,4 +75,4 @@ export default function SignUpPage({ setUser }) {
       <p className="error-message">&nbsp;{errorMsg}</p>
     </>
   );
-}
+};

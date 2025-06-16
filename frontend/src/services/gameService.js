@@ -26,6 +26,10 @@ export async function importFromRawg(rawgId) {
   return await sendRequest(`/api/rawg/games/${rawgId}/import`, 'POST');
 };
 
-export function flagGame(gameId, reason) {
+export async function flagGame(gameId, reason = '') {
   return sendRequest(`/api/flags/games/${gameId}`, 'POST', { reason });
-}
+};
+
+export async function checkGameFlag(gameId) {
+  return sendRequest(`/api/flags/games/${gameId}`);
+};
