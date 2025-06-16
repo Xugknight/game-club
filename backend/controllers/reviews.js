@@ -35,7 +35,9 @@ async function update(req, res) {
   try {
     const review = await Review.findById(req.params.reviewId);
     if (!review) return res.status(404).json({ message: 'Review Not Found' });
-    if (!review.reviewer.equals(req.user._id)) return res.status(403).json({ message: 'You Cannot Do That!' });
+    if (!review.reviewer.equals(req.user._id) && !req.user.isAdmin) {
+      return res.status(403).json({ message: 'You Cannot Do That!' });
+    }
     Object.assign(review, req.body);
     await review.save();
     res.json(review);
@@ -49,7 +51,9 @@ async function deleteReview(req, res) {
   try {
     const review = await Review.findById(req.params.reviewId);
     if (!review) return res.status(404).json({ message: 'Review Not Found' });
-    if (!review.reviewer.equals(req.user._id)) return res.status(403).json({ message: 'You Cannot Do That!' });
+    if (!review.reviewer.equals(req.user._id) && !req.user.isAdmin) {
+      return res.status(403).json({ message: 'You Cannot Do That!' });
+    }
     await review.deleteOne();
     res.json({ message: 'Review Deleted' });
   } catch (err) {
