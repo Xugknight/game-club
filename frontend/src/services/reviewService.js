@@ -1,6 +1,7 @@
 import sendRequest from "./sendRequest";
 
 const BASE_URL = '/api/games';
+const FLAG_URL = '/api/flags/reviews';
 
 export async function getReviews(gameId) {
     return await sendRequest(`${BASE_URL}/${gameId}/reviews`);
@@ -18,10 +19,10 @@ export async function deleteReview(gameId, reviewId,) {
     return await sendRequest(`${BASE_URL}/${gameId}/reviews/${reviewId}`, 'DELETE');
 };
 
-export function flagReview(gameId, reviewId, reason) {
-  return sendRequest(`/api/flags/reviews/${reviewId}`, 'POST', { reason });
+export function flagReview(reviewId, reason) {
+  return sendRequest(`${FLAG_URL}/${reviewId}`, 'POST', { reason });
 };
 
 export async function checkReviewFlag(reviewId) {
-  return sendRequest(`/api/flags/reviews/${reviewId}`);
+  return sendRequest(`${FLAG_URL}/${reviewId}`);
 };
