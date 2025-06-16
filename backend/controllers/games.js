@@ -10,7 +10,8 @@ module.exports = {
 
 async function index(req, res) {
   try {
-    const games = await Game.find({});
+    const games = await Game.find({})
+    .sort({ releaseDate: -1 });
     res.json(games);
   } catch (err) {
     console.error(err);

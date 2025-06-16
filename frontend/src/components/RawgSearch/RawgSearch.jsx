@@ -47,7 +47,7 @@ export default function RawgSearch() {
           required
         />
         <button type="submit" disabled={loading}>
-          {loading ? 'Searching…' : 'Import'}
+          {loading ? 'Searching…' : 'Search'}
         </button>
       </form>
 
