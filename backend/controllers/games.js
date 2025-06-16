@@ -59,7 +59,9 @@ async function update(req, res) {
   try {
     const game = await Game.findById(req.params.gameId);
     if (!game) return res.status(404).json({ message: 'Game Not Found' });
-    if (!game.createdBy.equals(req.user._id)) return res.status(403).json({ message: 'You Cannot Do That!' });
+    if (!game.createdBy.equals(req.user._id) && !req.user.isAdmin) {
+      return res.status(403).json({ message: 'You Cannot Do That!' });
+    }
     Object.assign(game, req.body);
     await game.save();
     res.json(game);
@@ -73,7 +75,9 @@ async function deleteGame(req, res) {
   try {
     const game = await Game.findById(req.params.gameId);
     if (!game) return res.status(404).json({ message: 'Game Not Found' });
-    if (!game.createdBy.equals(req.user._id)) return res.status(403).json({ message: 'You Cannot Do That!' });
+    if (!game.createdBy.equals(req.user._id) && !req.user.isAdmin) {
+      return res.status(403).json({ message: 'You Cannot Do That!' });
+    }
     await game.deleteOne();
     res.json({ message: 'Game Deleted' });
   } catch (err) {
