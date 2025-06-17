@@ -29,15 +29,24 @@ export default function GameDetailPage() {
         ]);
         setGame(gameData);
         setReviews(reviewData);
-        if (currentUser) {
-          const { pending } = await gameService.checkGameFlag(gameId);
-          setPending(pending);
-        }
       } catch (err) {
         console.error('Failed to Load Game or Reviews', err);
       }
     };
     fetchGameAndReviews();
+  }, [gameId]);
+
+  useEffect(() => {
+    if (!currentUser) return;
+    async function checkFlag() {
+      try {
+        const { pending } = await gameService.checkGameFlag(gameId);
+        setPending(pending);
+      } catch (err) {
+        console.error('Failed to check flag status', err);
+      }
+    }
+    checkFlag();
   }, [gameId, currentUser]);
 
   useEffect(() => {
