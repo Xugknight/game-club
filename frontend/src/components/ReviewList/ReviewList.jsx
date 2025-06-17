@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router';
 import { getUser } from '../../services/authService';
 import * as reviewService from '../../services/reviewService';
 
@@ -27,9 +28,8 @@ export default function ReviewList({ reviews, onEdit, onDelete }) {
 
                 return (
                     <div key={review._id} className="review">
-                        <p>
-                            <strong>{review.reviewer.username}</strong> rated {review.rating}/5
-                        </p>
+                        <Link to={`/users/${review.reviewer._id}`}>
+                            <strong>{review.reviewer.username}</strong></Link> rated {review.rating}/5
                         <p>{review.content}</p>
 
                         {(isOwner || isAdmin) && (
