@@ -34,7 +34,7 @@ export default function NewGamePage() {
 
   return (
     <>
-      <h2>Add New Game</h2>
+      <h1>Add New Game</h1>
 
       {!useManual && (
         <>

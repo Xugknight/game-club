@@ -37,7 +37,7 @@ export default function RawgSearch() {
 
   return (
     <div>
-      <h2>Import Game</h2>
+      <h3>Import Game</h3>
       <form onSubmit={handleSubmit} style={{ marginBottom: '1rem' }}>
         <input
           type="text"
