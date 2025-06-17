@@ -1,4 +1,4 @@
-import { NavLink, Link } from 'react-router';
+import { Link } from 'react-router';
 import { logOut } from '../../services/authService';
 import './NavBar.css';
 
@@ -11,19 +11,19 @@ export default function NavBar({ user, setUser }) {
 
   return (
     <nav className="NavBar">
-      <NavLink to="/">Home</NavLink>
+      <Link to="/">Home</Link>
       &nbsp; | &nbsp;
       {user ? (
         <>
-          <NavLink to="/games" end>
-            Games
-          </NavLink>
+          <Link to="/games">Games</Link>
           &nbsp; | &nbsp;
-          <NavLink to="/games/new">Add Game</NavLink>
+          <Link to="/games/new">Add Game</Link>
+          &nbsp; | &nbsp;
+          <Link to={`/users/${user._id}`}>My Profile</Link>
           {user.isAdmin && (
             <>
               &nbsp;|&nbsp;
-              <NavLink to="/admin">Admin</NavLink>
+              <Link to="/admin">Admin</Link>
             </>
           )}
           &nbsp; | &nbsp;
@@ -32,13 +32,11 @@ export default function NavBar({ user, setUser }) {
         </>
       ) : (
         <>
-          <NavLink to="/games" end>
-            Games
-          </NavLink>
+          <Link to="/games" end>Games</Link>
           &nbsp; | &nbsp;
-          <NavLink to="/login">Log In</NavLink>
+          <Link to="/login">Log In</Link>
           &nbsp; | &nbsp;
-          <NavLink to="/signup">Sign Up</NavLink>
+          <Link to="/signup">Sign Up</Link>
         </>
       )}
     </nav>

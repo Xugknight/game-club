@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router";
 import { getUser } from "../../services/authService";
 import * as gameService from '../../services/gameService';
 import * as reviewService from '../../services/reviewService';
+import * as userService from '../../services/userService';
 import GameCard from "../../components/GameCard/GameCard";
 import ReviewList from "../../components/ReviewList/ReviewList";
 import ReviewForm from "../../components/ReviewForm/ReviewForm";
@@ -17,9 +18,10 @@ export default function GameDetailPage() {
   const [editingReview, setEditingReview] = useState(null);
   const [feedback, setFeedback] = useState("");
   const [pendingFlag, setPending] = useState(false);
+  const [isFav, setIsFav] = useState(false);
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchGameAndReviews() {
       try {
         const [gameData, reviewData] = await Promise.all([
           gameService.show(gameId),
@@ -30,40 +32,71 @@ export default function GameDetailPage() {
         const { pending } = await gameService.checkGameFlag(gameId);
         setPending(pending);
       } catch (err) {
-        console.error("Failed to Load Game or Reviews", err);
+        console.error('Failed to Load Game or Reviews', err);
       }
     };
-    fetchData();
+    fetchGameAndReviews();
   }, [gameId]);
+
+  useEffect(() => {
+    if (!currentUser) return;
+    async function fetchFavoriteStatus() {
+      try {
+          const favorites = await userService.getFavorites(currentUser._id);
+          setIsFav(favorites.some(game => game._id === gameId));
+      } catch (err) {
+        console.error('Failed to Load Favorites', err);
+      }
+    };
+    fetchFavoriteStatus();
+  }, [gameId, currentUser]);
 
   async function loadReviews() {
     try {
       const data = await reviewService.getReviews(gameId);
       setReviews(data);
     } catch (err) {
-      console.error("Failed to Load Reviews", err);
+      console.error('Failed to Load Reviews', err);
     }
   };
 
   async function handleDeleteRequest() {
     try {
-    await gameService.flagGame(gameId, "Delete Request");
+    await gameService.flagGame(gameId, 'Delete Request');
     setPending(true);
-    setFeedback("Delete Request Submitted");
+    setFeedback('Delete Request Submitted');
   } catch (err) {
-    if (err.message.includes("409")) {
+    if (err.message.includes('409')) {
       setPending(true);
-      setFeedback("Already Requested");
+      setFeedback('Already Requested');
     } else {
-      setFeedback("Failed to Submit Delete Request");
+      setFeedback('Failed to Submit Delete Request');
     }
   }
-  setTimeout(() => setFeedback(""), 5000);
+  setTimeout(() => setFeedback(''), 5000);
   };
 
   async function handleAdminDelete() {
     await gameService.deleteGame(gameId);
     navigate('/games');
+  };
+
+  async function toggleFavorite() {
+    try {
+      if (isFav) {
+        await userService.removeFavorite(currentUser._id, gameId);
+        setIsFav(false);
+        setFeedback('Removed from Favorites');
+      } else {
+        await userService.addFavorite(currentUser._id, gameId);
+        setIsFav(true);
+        setFeedback('Added to Favorites');
+      }
+    } catch (err) {
+      console.error(err);
+      setFeedback('Failed to Update Favorites');
+    }
+    setTimeout(() => setFeedback(''), 3000)
   };
 
   if (!game) return <p>Loading…</p>
@@ -76,6 +109,14 @@ export default function GameDetailPage() {
         <p>{game.description}</p>
 
         {feedback && <p className="feedback">{feedback}</p>}
+        
+                {currentUser && 
+                  <button 
+                  onClick={toggleFavorite}
+                  >
+                    {isFav ? '★ Remove Favorite' : '☆ Add to Favorites'}
+                  </button>
+                }
 
         {currentUser && (
           currentUser.isAdmin
