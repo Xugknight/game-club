@@ -29,14 +29,16 @@ export default function GameDetailPage() {
         ]);
         setGame(gameData);
         setReviews(reviewData);
-        const { pending } = await gameService.checkGameFlag(gameId);
-        setPending(pending);
+        if (currentUser) {
+          const { pending } = await gameService.checkGameFlag(gameId);
+          setPending(pending);
+        }
       } catch (err) {
         console.error('Failed to Load Game or Reviews', err);
       }
     };
     fetchGameAndReviews();
-  }, [gameId]);
+  }, [gameId, currentUser]);
 
   useEffect(() => {
     if (!currentUser) return;
@@ -103,20 +105,22 @@ export default function GameDetailPage() {
 
   return (
     <div>
-      <GameCard game={game} />
+      <div className="game-detail-header">
+        <GameCard game={game} />
+      </div>
       <section style={{ padding: "1rem" }}>
         <h2>About:</h2>
         <p>{game.description}</p>
 
         {feedback && <p className="feedback">{feedback}</p>}
-        
-                {currentUser && 
-                  <button 
-                  onClick={toggleFavorite}
-                  >
-                    {isFav ? '★ Remove Favorite' : '☆ Add to Favorites'}
-                  </button>
-                }
+      
+              {currentUser && 
+                <button 
+                onClick={toggleFavorite}
+                >
+                  {isFav ? '★ Remove Favorite' : '☆ Add to Favorites'}
+                </button>
+              }
 
         {currentUser && (
           currentUser.isAdmin
