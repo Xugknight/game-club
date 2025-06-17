@@ -23,7 +23,8 @@ const userSchema = new Schema(
     isAdmin: {
       type: Boolean,
       default: false,
-    }
+    },
+    favorites: [{ type: Schema.Types.ObjectId, ref: 'Game' }]
   },
   {
     timestamps: true,
