@@ -27,7 +27,7 @@ export default function GameListPage() {
         value={filter}
         onChange={e => setFilter(e.target.value)}
         placeholder="Search games…"
-        style={{ marginBottom: '1rem', padding: '0.5rem', width: '100%' }}
+        className='search-input'
       />
 
       {filteredGames.length ? (

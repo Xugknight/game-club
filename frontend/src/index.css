@@ -100,3 +100,8 @@ h2 {
   width: 60%;
   max-width: 400px;
 }
+
+.search-input {
+  max-width: 400px;
+  width: 100%;
+}
