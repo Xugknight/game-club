@@ -32,7 +32,7 @@ export default function NavBar({ user, setUser }) {
         </>
       ) : (
         <>
-          <Link to="/games" end>Games</Link>
+          <Link to="/games">Games</Link>
           &nbsp; | &nbsp;
           <Link to="/login">Log In</Link>
           &nbsp; | &nbsp;
