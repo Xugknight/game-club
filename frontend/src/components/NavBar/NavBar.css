@@ -1,30 +1,69 @@
 .NavBar {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  padding: 2vmin;
-  font-size: 2vmin;
+  padding: 0.5rem 1rem;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  position: relative;
+  border-bottom: 1px solid #ccc;
 }
 
-.NavBar {
-  a {
-    border-radius: 0.8vmin;
-    padding: 0.5vmin 1.5vmin;
-    text-decoration: none;
-    color: #1a1a1a;
-  }
+.nav-left a,
+.nav-right button {
+  margin-right: 1rem;
+  text-decoration: none;
+  color: inherit;
+}
 
-  a:hover {
-    background-color: #1a1a1a;
-    color: whitesmoke;
-  }
+.nav-right {
+  position: relative;
+}
 
-  a.active {
-    background-color: rebeccapurple;
-    color: whitesmoke;
-  }
+.user-button {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  font: inherit;
+  cursor: pointer;
+}
 
-  span {
-    color: rgb(161, 11, 11);
-  }
+.user-button svg {
+  margin: 0 0.25rem;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.25rem);
+  background: var(--color-background);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  list-style: none;
+  padding: 0.5rem 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 100;
+  min-width: 150px;
+}
+
+.dropdown-menu li {
+  padding: 0.5rem 1rem;
+}
+
+.dropdown-menu li + li {
+  border-top: 1px solid #eee;
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
 }

@@ -114,14 +114,14 @@ export default function GameDetailPage() {
 
   return (
     <div>
-      <div className="game-detail-header">
+      <div className='game-detail-header'>
         <GameCard game={game} />
       </div>
       <section style={{ padding: "1rem" }}>
         <h2>About:</h2>
         <p>{game.description}</p>
 
-        {feedback && <p className="feedback">{feedback}</p>}
+        {feedback && <p className='feedback'>{feedback}</p>}
       
               {currentUser && 
                 <button 
@@ -133,7 +133,7 @@ export default function GameDetailPage() {
 
         {currentUser && (
           currentUser.isAdmin
-            ? <button onClick={handleAdminDelete} className="danger">
+            ? <button onClick={handleAdminDelete} className='danger'>
                 Delete Game
               </button>
             : !pendingFlag && <button onClick={handleDeleteRequest}>
