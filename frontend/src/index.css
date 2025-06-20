@@ -206,7 +206,6 @@ button.btn-unstyled {
 }
 
 .game-description,
-.review-card,
 .auth-form {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
@@ -214,6 +213,79 @@ button.btn-unstyled {
   padding: var(--spacing);
   margin-bottom: var(--spacing);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.review-form {
+  max-width: 500px;
+  width: 90%;
+  margin: 1.5rem auto;
+  display: grid;
+  gap: var(--spacing);
+  background: var(--color-bg);
+  padding: var(--spacing);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.review-form label {
+  font-weight: 600;
+  color: var(--color-fg);
+}
+
+.review-form input,
+.review-form textarea,
+.review-form select {
+  width: 100%;
+  font: inherit;
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  color: var(--color-fg);
+  transition: border-color var(--transition);
+}
+
+.review-form input:focus,
+.review-form textarea:focus,
+.review-form select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.review-form button {
+  justify-self: start;
+  padding: 0.5rem 1rem;
+}
+
+.review-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+
+.review-card {
+  background:    var(--color-bg);
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding:       var(--spacing);
+  margin-bottom: var(--spacing);
+  box-shadow:    0 2px 4px rgba(0,0,0,0.05);
+
+  display:       flex;
+  flex-direction: column;
+  gap:           0.75rem;
+}
+
+.review-card > div {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: var(--spacing);
+}
+
+.review-card button {
+  font-size: 0.9rem;
+  padding: 0.4rem 0.75rem;
 }
 
 .detail-toolbar {

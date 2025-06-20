@@ -34,7 +34,7 @@ export default function ReviewList({ reviews, onEdit, onDelete }) {
                 const alreadyRequested = pendingFlags[review._id];
 
                 return (
-                    <div key={review._id} className="review">
+                    <div key={review._id} className="review-card">
                         <Link to={`/users/${review.reviewer._id}`}>
                             <strong>{review.reviewer.username}</strong></Link> rated {review.rating}/5
                         <p>{review.content}</p>

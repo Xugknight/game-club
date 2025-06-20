@@ -39,7 +39,7 @@ export default function ReviewForm({
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="review-form">
             <label>
                 Rating
                 <select
