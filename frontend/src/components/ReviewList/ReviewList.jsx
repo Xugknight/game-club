@@ -8,18 +8,23 @@ export default function ReviewList({ reviews, onEdit, onDelete }) {
     const [pendingFlags, setPendingFlags] = useState({});
 
     useEffect(() => {
-        if (!currentUser) return;
-
+        if (!currentUser?._id) return;
+        let isMounted = true;
         async function loadPendingFlags() {
             const flagsMap = {};
             for (const review of reviews) {
-                const { pending } = await reviewService.checkReviewFlag(review._id);
-                flagsMap[review._id] = pending;
+                try {
+                    const { pending } = await reviewService.checkReviewFlag(review._id);
+                    flagsMap[review._id] = pending;
+                } catch {
+                    flagsMap[review._id] = false;
+                }
             }
-            setPendingFlags(flagsMap);
+            if (isMounted) setPendingFlags(flagsMap);
         }
         if (reviews.length) loadPendingFlags();
-    }, [reviews, currentUser]);
+        return () => { isMounted = false; };
+    }, [reviews]);
 
     return (
         <div>
