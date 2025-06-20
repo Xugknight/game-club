@@ -25,7 +25,7 @@ export default function GameListPage() {
       <input
         type="text"
         value={filter}
-        onChange={e => setFilter(e.target.value)}
+        onChange={evt => setFilter(evt.target.value)}
         placeholder="Search games…"
         className='search-input'
       />
