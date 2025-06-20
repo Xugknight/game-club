@@ -34,7 +34,7 @@ Key features:
 
 ---
 
-## Tech Stack
+## Technologies Used/Attributions
 
 - **Frontend**  
   - React 
@@ -42,6 +42,7 @@ Key features:
   - React Icons 
   - React Responsive  
   - CSS 
+  - Favicon Generator
 - **Backend**  
   - Node.js + Express  
   - MongoDB + Mongoose  
