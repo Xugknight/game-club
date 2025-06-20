@@ -149,7 +149,7 @@ export default function GameDetailPage() {
               >
                 Delete Game
               </button>
-              : !pendingFlag && <button onClick={handleDeleteRequest} className="btn btn-secondary">
+              : !pendingFlag && <button onClick={handleDeleteRequest} className="btn btn-danger">
                 Request Deletion
               </button>
           )}

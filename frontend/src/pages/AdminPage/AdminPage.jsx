@@ -44,10 +44,10 @@ export default function AdminPage() {
             <strong>"{flag.contentPreview}"</strong>
             {flag.reason && ` — “${flag.reason}”`}
           </p>
-          <button onClick={() => handleDeleteAndResolve(flag)}>
+          <button className="btn btn-danger" onClick={() => handleDeleteAndResolve(flag)}>
             Approve & Delete
           </button>
-          <button onClick={() => handleDismiss(flag._id)} style={{ marginLeft:'0.5rem' }}>
+          <button className="btn btn-secondary" onClick={() => handleDismiss(flag._id)} style={{ marginLeft:'0.5rem' }}>
             Dismiss
           </button>
         </div>

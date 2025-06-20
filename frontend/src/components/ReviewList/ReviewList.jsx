@@ -43,6 +43,7 @@ export default function ReviewList({ reviews, onEdit, onDelete }) {
 
                         {!isOwner && !isAdmin && currentUser && !alreadyRequested && (
                             <button
+                                className="btn btn-danger"
                                 onClick={async () => {
                                     try {
                                         await reviewService.flagReview(review._id, "Delete Request");

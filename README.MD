@@ -1,44 +1,65 @@
-# Restaurant Randomizer
+# Game Club
 
-A web app that helps indecisive diners pick a place to eat.  
-Visitors can roll the dice to get a random restaurant (with optional filters), and registered users can add, and favorite restaurants. I wanted to make this app because I frequently can't decide on what to eat.
+A full-stack “game club” web app where players can discover games (via RAWG), add their own entries, write reviews, and favorite their games.  
+
+Key features:
+- Browse & search games by title or fetch from the RAWG API  
+- Registered users can add new games, write/edit/delete their reviews, and maintain a list of favorites   
+- User profiles exposing each user’s favorites and their username  
+- Light / dark mode toggle with persisted preference  
+
+---
+
+## Screenshots
+*Sign up Page*  
+![Sign-Up](./frontend/public/images/signup.png)
+
+*Log in Page*  
+![Log-In](./frontend/public/images/login.png)
+
+*Landing*  
+![game-list](./frontend/public/images/landing.png)
+
+*Game Detail (with reviews, favorites, flagging)*  
+![game-detail](./frontend/public/images/gamedetail.png)
+
+*Import Games*  
+![game-list](./frontend/public/images/import.png)
+
+*Manual Add Game Form*  
+![game-list](./frontend/public/images/manual%20add.png)
 
 
-## Screenshot
-![Landing Page](./public/images/Screenshot%202025-05-22%20155423.png)
-![Sign Up Page](./public/images/Screenshot%202025-05-22%20155441.png)
-![Randomizer Function](./public/images/Screenshot%202025-05-22%20155501.png)
-![Favorite List](./public/images/Screenshot%202025-05-22%20155543.png)
 
 
-# Technologies Used
+---
 
-- JavaScript
-- HTML
-- CSS
-- Node.js
-- Express
-- MongoDB
-- Mongoose
-- bcrypt
-- method-overide
-- morgan
-- favicongenerator
-- AI to explain some concepts
+## Tech Stack
 
+- **Frontend**  
+  - React 
+  - React Router 
+  - React Icons 
+  - React Responsive  
+  - CSS 
+- **Backend**  
+  - Node.js + Express  
+  - MongoDB + Mongoose  
+  - JSON Web Tokens for auth  
+  - bcrypt for password hashing  
+  - Morgan, dotenv, CORS  
+- **APIs**  
+  - RAWG API for game data imports  
 
-# Getting Started
+---
 
-[Project Planning!](https://trello.com/b/zUOG6Tzr/project-2)
+## Future Improvements
+- Pagination & advanced filters on game lists
+- Upload / serve custom cover images
+- Social features: comments on reviews, follow users
+---
 
-[Click to View Randomizer App!](https://restaurant-randomizer-7fdf1fb5fda0.herokuapp.com/)
+## Getting Started
+[Project Planning!](https://trello.com/b/Oz1C6uYE/game-club)
 
-1. Run npm -i install
-2. Create .env file
-3. Link mongoDB URI and set SESSION_SECRET
-
-# Next Steps
-
-- Restaurant History
-- Check DB for duplicate entries
-- User reviews for restaurants
+[View the App Here](https://game-club-7dfc89d36c85.herokuapp.com/)

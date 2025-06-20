@@ -1,14 +1,16 @@
 :root {
-  --color-primary: #4f46e5;
-  --color-secondary: #10b981;
-  --color-danger: #ef4444;
-  --color-bg: #ffffff;
-  --color-fg: #1f2937;
-  --color-border: #e5e7eb;
-  --color-muted: #6b7280;
+  --color-primary: #3730A3;
+  --color-secondary: #047857;
+  --color-danger: #B91C1C;
+
+  --color-bg: #FFFFFF;
+  --color-fg: #1F2937;
+  --color-border: #D1D5DB;
+  --color-muted: #4B5563;
+
   --radius: 0.5rem;
-  --transition: 0.2s ease;
   --spacing: 1rem;
+  --transition: 0.2s ease;
 
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
@@ -26,10 +28,10 @@ body {
 }
 
 body.dark {
-  --color-bg: #1f2937;
-  --color-fg: #f9fafb;
+  --color-bg: #111827;
+  --color-fg: #F9FAFB;
   --color-border: #374151;
-  --color-muted: #9ca3af;
+  --color-muted: #9CA3AF;
 }
 
 h1,
@@ -56,6 +58,10 @@ p {
   max-width: 60ch;
   margin-left: auto;
   margin-right: auto;
+}
+
+.text-muted {
+  color: var(--color-muted);
 }
 
 a {
@@ -90,29 +96,29 @@ button.btn-unstyled {
 
 .btn-primary {
   background: var(--color-primary);
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .btn-primary:hover {
-  background: #4338ca;
+  background: #2F2B8F;
 }
 
 .btn-secondary {
   background: var(--color-secondary);
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .btn-secondary:hover {
-  background: #059669;
+  background: #036749;
 }
 
 .btn-danger {
   background: var(--color-danger);
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .btn-danger:hover {
-  background: #dc2626;
+  background: #991B1B;
 }
 
 .form-group {
@@ -178,7 +184,7 @@ button.btn-unstyled {
   margin: var(--spacing) auto;
   display: block;
   background: var(--color-bg);
-  color:     var(--color-fg);
+  color: var(--color-fg);
 }
 
 .game-grid {
@@ -200,7 +206,8 @@ button.btn-unstyled {
 }
 
 .game-description,
-.review-card {
+.review-card,
+.auth-form {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
