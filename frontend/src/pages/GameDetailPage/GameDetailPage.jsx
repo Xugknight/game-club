@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
+import { FiHeart } from 'react-icons/fi';
+import { AiFillHeart } from 'react-icons/ai';
 import { getUser } from "../../services/authService";
 import * as gameService from '../../services/gameService';
 import * as reviewService from '../../services/reviewService';
@@ -53,8 +55,8 @@ export default function GameDetailPage() {
     if (!currentUser) return;
     async function fetchFavoriteStatus() {
       try {
-          const favorites = await userService.getFavorites(currentUser._id);
-          setIsFav(favorites.some(game => game._id === gameId));
+        const favorites = await userService.getFavorites(currentUser._id);
+        setIsFav(favorites.some(game => game._id === gameId));
       } catch (err) {
         console.error('Failed to Load Favorites', err);
       }
@@ -73,18 +75,18 @@ export default function GameDetailPage() {
 
   async function handleDeleteRequest() {
     try {
-    await gameService.flagGame(gameId, 'Delete Request');
-    setPending(true);
-    setFeedback('Delete Request Submitted');
-  } catch (err) {
-    if (err.message.includes('409')) {
+      await gameService.flagGame(gameId, 'Delete Request');
       setPending(true);
-      setFeedback('Already Requested');
-    } else {
-      setFeedback('Failed to Submit Delete Request');
+      setFeedback('Delete Request Submitted');
+    } catch (err) {
+      if (err.message.includes('409')) {
+        setPending(true);
+        setFeedback('Already Requested');
+      } else {
+        setFeedback('Failed to Submit Delete Request');
+      }
     }
-  }
-  setTimeout(() => setFeedback(''), 5000);
+    setTimeout(() => setFeedback(''), 5000);
   };
 
   async function handleAdminDelete() {
@@ -117,71 +119,85 @@ export default function GameDetailPage() {
       <div className='game-detail-header'>
         <GameCard game={game} />
       </div>
-      <section style={{ padding: "1rem" }}>
+      <section
+        className="game-description"
+      >
         <h2>About:</h2>
         <p>{game.description}</p>
+      </section>
 
+      <section>
         {feedback && <p className='feedback'>{feedback}</p>}
-      
-              {currentUser && 
-                <button 
-                onClick={toggleFavorite}
-                >
-                  {isFav ? '★ Remove Favorite' : '☆ Add to Favorites'}
-                </button>
+        <div className="detail-toolbar">
+          {currentUser &&
+            <button
+              className="btn btn-secondary"
+              onClick={toggleFavorite}
+            >
+              {isFav
+                ? <><AiFillHeart style={{ marginRight: '0.25rem' }} />Remove Favorite</>
+                : <><FiHeart style={{ marginRight: '0.25rem' }} />Add to Favorites</>
               }
+            </button>
+          }
 
-        {currentUser && (
-          currentUser.isAdmin
-            ? <button onClick={handleAdminDelete} className='danger'>
+          {currentUser && (
+            currentUser.isAdmin
+              ? <button
+                onClick={handleAdminDelete}
+                className='btn btn-danger'
+              >
                 Delete Game
               </button>
-            : !pendingFlag && <button onClick={handleDeleteRequest}>
+              : !pendingFlag && <button onClick={handleDeleteRequest} className="btn btn-secondary">
                 Request Deletion
               </button>
-        )}
+          )}
+        </div>
 
         <h3>Reviews</h3>
+        <div className="review-section">
+          {currentUser && !showForm && (
+            <button
+              onClick={() => {
+                setEditingReview(null)
+                setShowForm(true)
+              }}
+              className="btn btn-primary"
+              style={{ marginBottom: "1rem" }}
+            >
+              Add Review
+            </button>
+          )}
 
-        {currentUser && !showForm && (
-          <button
-            onClick={() => {
-              setEditingReview(null)
+          {showForm && (
+            <ReviewForm
+              gameId={gameId}
+              reviewToEdit={editingReview}
+              onSuccess={() => {
+                setShowForm(false)
+                setEditingReview(null)
+                loadReviews()
+              }}
+              onCancel={() => {
+                setShowForm(false)
+                setEditingReview(null)
+              }}
+            />
+          )}
+
+          <ReviewList
+            reviews={reviews}
+            onEdit={review => {
+              setEditingReview(review)
               setShowForm(true)
             }}
-            style={{ marginBottom: "1rem" }}
-          >
-            Add Review
-          </button>
-        )}
-
-        {showForm && (
-          <ReviewForm
-            gameId={gameId}
-            reviewToEdit={editingReview}
-            onSuccess={() => {
-              setShowForm(false)
-              setEditingReview(null)
+            onDelete={async reviewId => {
+              await reviewService.deleteReview(gameId, reviewId)
               loadReviews()
             }}
-            onCancel={() => {
-              setShowForm(false)
-              setEditingReview(null)
-            }}
           />
-        )}
-
-        <ReviewList
-          reviews={reviews}
-          onEdit={review => {
-            setEditingReview(review)
-            setShowForm(true)
-          }}
-          onDelete={async reviewId => {
-            await reviewService.deleteReview(gameId, reviewId)
-            loadReviews()
-          }}
-        />
+        </div>
       </section>
     </div>
   )

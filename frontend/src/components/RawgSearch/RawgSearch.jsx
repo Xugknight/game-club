@@ -5,10 +5,10 @@ import { getUser } from '../../services/authService';
 import { useNavigate } from 'react-router';
 
 export default function RawgSearch() {
-  const [query, setQuery]     = useState('');
+  const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError]     = useState(null);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const user = getUser();
 
@@ -38,18 +38,24 @@ export default function RawgSearch() {
   return (
     <div>
       <h3>Import Game</h3>
-      <form onSubmit={handleSubmit} style={{ marginBottom: '1rem' }}>
-        <input
-          type="text"
-          value={query}
-          onChange={(evt) => setQuery(evt.target.value)}
-          placeholder="Type a game name…"
-          required
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Searching…' : 'Search'}
-        </button>
-      </form>
+      <div class='form-group'>
+        <form onSubmit={handleSubmit} style={{ marginBottom: '1rem' }}>
+          <input
+            type="text"
+            value={query}
+            onChange={(evt) => setQuery(evt.target.value)}
+            placeholder="Type a game name…"
+            required
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            class='btn btn-primary'
+          >
+            {loading ? 'Searching…' : 'Search'}
+          </button>
+        </form>
+      </div>
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
@@ -58,8 +64,11 @@ export default function RawgSearch() {
           <li key={game.id} style={{ marginBottom: '0.5rem' }}>
             <strong>{game.name}</strong> ({game.released}){' '}
             {user && (
-              <button onClick={() => handleImport(game.id)}>
-              Add to Library
+              <button
+                onClick={() => handleImport(game.id)}
+                class='btn btn-primary'
+              >
+                Add to Library
               </button>
             )}
           </li>

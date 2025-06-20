@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { FiLogIn } from 'react-icons/fi';
 import * as authService from '../../services/authService';
 
 export default function LogInPage({ setUser }) {
@@ -9,7 +10,7 @@ export default function LogInPage({ setUser }) {
     password: '',
   });
   const [errorMsg, setErrorMsg] = useState('');
-  
+
   const navigate = useNavigate();
 
   async function handleSubmit(evt) {
@@ -30,26 +31,37 @@ export default function LogInPage({ setUser }) {
 
   return (
     <>
-      <h2>Log In!</h2>
-      <form autoComplete="off" onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">LOG IN</button>
-      </form>
+      <form
+        autoComplete="off"
+        onSubmit={handleSubmit}
+        className='auth-form'
+      >
+        <div class='form-group'>
+          <h2>Log In</h2>
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <button type="submit" className="btn btn-primary auth-submit">
+          <FiLogIn
+            style={{ marginRight: '0.5rem' }}
+          />
+          Log In
+        </button>
+      </form >
       <p className="error-message">&nbsp;{errorMsg}</p>
     </>
   );

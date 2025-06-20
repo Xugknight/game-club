@@ -59,11 +59,11 @@ export default function ReviewForm({
                     required
                 />
             </label>
-            <button type="submit">
+            <button type="submit" className="btn btn-primary">
                 {isEdit ? 'Update Review' : 'Add Review'}
             </button>
             {onCancel && (
-                <button type="button" onClick={onCancel}>
+                <button type="button" className="btn btn-secondary" onClick={onCancel}>
                     Cancel
                 </button>
             )}

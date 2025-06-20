@@ -42,6 +42,7 @@ export default function NewGamePage() {
           <button
             style={{ margin: '1rem 0' }}
             onClick={() => setUseManual(true)}
+            class='btn btn-primary'
           >
             Add Manually
           </button>
@@ -52,58 +53,65 @@ export default function NewGamePage() {
           <button
             style={{ marginBottom: '1rem' }}
             onClick={() => setUseManual(false)}
+            class='btn btn-primary'
           >
-          Back to Import
+            Back to Import
           </button>
-          <form onSubmit={handleSubmit}>
-            <label>Title</label>
-            <input
-              type="text"
-              name='title'
-              value={formData.title}
-              onChange={handleChange}
-              required
-            />
-            <label>Developer</label>
-            <input
-              type="text"
-              name='developer'
-              value={formData.developer}
-              onChange={handleChange}
-              required
-            />
-            <label>Platform</label>
-            <input
-              type="text"
-              name='platform'
-              value={formData.platform}
-              onChange={handleChange}
-              required
-            />
-            <label>Release Date</label>
-            <input
-              type="date"
-              name='releaseDate'
-              value={formData.releaseDate}
-              onChange={handleChange}
-              required
-            />
-            <label>Cover Image URL</label>
-            <input
-              type="text"
-              name='coverImageUrl'
-              value={formData.coverImageUrl}
-              onChange={handleChange}
-              required
-            />
-            <label>Description</label>
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-            />
-            <button type="submit">Add Game</button>
-          </form>
+          <div class='form-group'>
+            <form onSubmit={handleSubmit}>
+              <label>Title</label>
+              <input
+                type="text"
+                name='title'
+                value={formData.title}
+                onChange={handleChange}
+                required
+              />
+              <label>Developer</label>
+              <input
+                type="text"
+                name='developer'
+                value={formData.developer}
+                onChange={handleChange}
+                required
+              />
+              <label>Platform</label>
+              <input
+                type="text"
+                name='platform'
+                value={formData.platform}
+                onChange={handleChange}
+                required
+              />
+              <label>Release Date</label>
+              <input
+                type="date"
+                name='releaseDate'
+                value={formData.releaseDate}
+                onChange={handleChange}
+                required
+              />
+              <label>Cover Image URL</label>
+              <input
+                type="text"
+                name='coverImageUrl'
+                value={formData.coverImageUrl}
+                onChange={handleChange}
+                required
+              />
+              <label>Description</label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+              />
+              <button
+                type="submit"
+                class='btn btn-primary'
+              >
+                Add Game</button>
+            </form>
+          </div>
         </>
       )}
       <p className="error-message">&nbsp;{errorMsg}</p>

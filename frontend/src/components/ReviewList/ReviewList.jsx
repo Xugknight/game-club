@@ -34,8 +34,8 @@ export default function ReviewList({ reviews, onEdit, onDelete }) {
 
                         {(isOwner || isAdmin) && (
                             <div>
-                                <button onClick={() => onEdit(review)}>Edit</button>
-                                <button onClick={() => onDelete(review._id)}>Delete</button>
+                                <button className="btn btn-primary" onClick={() => onEdit(review)}>Edit</button>
+                                <button className="btn btn-danger" onClick={() => onDelete(review._id)}>Delete</button>
                             </div>
                         )}
 
