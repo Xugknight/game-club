@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router';
 import { FiUser, FiChevronDown } from 'react-icons/fi';
 import { logOut } from '../../services/authService';
+import DarkModeToggle from '../DarkModeToggle/DarkModeToggle';
 import './NavBar.css';
 
 export default function NavBar({ user, setUser }) {
@@ -25,18 +26,22 @@ export default function NavBar({ user, setUser }) {
   };
 
   return (
-     <nav className="NavBar">
+    <nav className="NavBar">
       <div className="nav-left">
         <Link to="/">Home</Link>
         <Link to="/games">Games</Link>
         {user && <Link to="/games/new">Add Game</Link>}
       </div>
 
+      <div style={{ marginLeft: "1rem" }}>
+        <DarkModeToggle />
+      </div>
+
       <div className="nav-right" ref={menuRef}>
         <button
           aria-haspopup="true"
           aria-expanded={open}
-          className="user-button"
+          className="user-button btn-unstyled"
           onClick={() => setOpen(o => !o)}
         >
           <FiUser /> {user ? user.username : 'Guest'} <FiChevronDown />
@@ -49,7 +54,7 @@ export default function NavBar({ user, setUser }) {
                 {user.isAdmin && (
                   <li><Link to="/admin" onClick={() => setOpen(false)}>Admin</Link></li>
                 )}
-                <li><button onClick={handleLogOut}>Log Out</button></li>
+                <li><button className='btn-unstyled'onClick={handleLogOut}>Log Out</button></li>
               </>
             ) : (
               <>

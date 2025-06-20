@@ -63,7 +63,7 @@ a {
   text-decoration: none;
 }
 
-button {
+button.btn-unstyled {
   all: unset;
   display: inline-flex;
   align-items: center;

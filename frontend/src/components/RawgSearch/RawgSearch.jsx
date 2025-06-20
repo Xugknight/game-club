@@ -38,10 +38,10 @@ export default function RawgSearch() {
   return (
     <div>
       <h3>Import Game</h3>
-      <div class='form-group'>
-        <form onSubmit={handleSubmit} style={{ marginBottom: '1rem' }}>
+        <form onSubmit={handleSubmit} className='form-group'style={{ maxWidth: 400, margin: '0 auto 1rem' }}>
           <input
             type="text"
+            className='search-input'
             value={query}
             onChange={(evt) => setQuery(evt.target.value)}
             placeholder="Type a game name…"
@@ -51,22 +51,23 @@ export default function RawgSearch() {
             type="submit"
             disabled={loading}
             class='btn btn-primary'
+            style={{ marginTop: '0.5rem', width: '100%' }}
           >
             {loading ? 'Searching…' : 'Search'}
           </button>
         </form>
-      </div>
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: 'var(--color-danger)', textAlign: 'center' }}>{error}</p>}
 
-      <ul>
+      <ul style={{ listStyle: 'none', padding: 0, maxWidth: 400, margin: '0 auto' }}>
         {results.map((game) => (
-          <li key={game.id} style={{ marginBottom: '0.5rem' }}>
+          <li key={game.id} style={{ marginBottom: '1rem' }}>
             <strong>{game.name}</strong> ({game.released}){' '}
             {user && (
               <button
                 onClick={() => handleImport(game.id)}
                 class='btn btn-primary'
+                style={{ marginLeft: '0.5rem' }}
               >
                 Add to Library
               </button>
