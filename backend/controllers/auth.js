@@ -32,11 +32,8 @@ async function signUp(req, res) {
   }
 };
 
-/*--- Helper Functions ---*/
-
 function createJWT(user) {
   return jwt.sign(
-    // data payload
     { user },
     process.env.SECRET,
     { expiresIn: '24h' }
