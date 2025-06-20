@@ -8,6 +8,8 @@ export default function ReviewList({ reviews, onEdit, onDelete }) {
     const [pendingFlags, setPendingFlags] = useState({});
 
     useEffect(() => {
+        if (!currentUser) return;
+
         async function loadPendingFlags() {
             const flagsMap = {};
             for (const review of reviews) {
@@ -17,7 +19,7 @@ export default function ReviewList({ reviews, onEdit, onDelete }) {
             setPendingFlags(flagsMap);
         }
         if (reviews.length) loadPendingFlags();
-    }, [reviews]);
+    }, [reviews, currentUser]);
 
     return (
         <div>

@@ -40,7 +40,7 @@ export default function SignUpPage({ setUser }) {
         onSubmit={handleSubmit}
         className='auth-form'
       >
-        <div class='form-group'>
+        <div className='form-group'>
           <label>Username</label>
           <input
             type="text"

@@ -40,9 +40,9 @@ export default function NewGamePage() {
         <>
           <RawgSearch />
           <button
-            style={{ margin: '1rem 0' }}
             onClick={() => setUseManual(true)}
-            class='btn btn-primary'
+            className='btn btn-primary'
+            style={{ display:'block', margin: '1rem auto' }}
           >
             Add Manually
           </button>
@@ -51,14 +51,13 @@ export default function NewGamePage() {
       {useManual && (
         <>
           <button
-            style={{ marginBottom: '1rem' }}
             onClick={() => setUseManual(false)}
-            class='btn btn-primary'
+            className='btn btn-secondary'
+            style={{ display:'block', margin: '1rem auto' }}
           >
             Back to Import
           </button>
-          <div class='form-group'>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='auth-form'>
               <label>Title</label>
               <input
                 type="text"
@@ -107,11 +106,10 @@ export default function NewGamePage() {
               />
               <button
                 type="submit"
-                class='btn btn-primary'
+                className='btn btn-primary'
               >
                 Add Game</button>
             </form>
-          </div>
         </>
       )}
       <p className="error-message">&nbsp;{errorMsg}</p>

@@ -165,9 +165,6 @@ button.btn-unstyled {
 .auth-submit {
   width: 100%;
   justify-content: center;
-}
-
-.auth-submit {
   margin-top: var(--spacing);
 }
 
@@ -180,6 +177,8 @@ button.btn-unstyled {
   border-radius: var(--radius);
   margin: var(--spacing) auto;
   display: block;
+  background: var(--color-bg);
+  color:     var(--color-fg);
 }
 
 .game-grid {
@@ -233,4 +232,27 @@ button.btn-unstyled {
   display: flex;
   flex-direction: column;
   gap: var(--spacing);
+}
+
+.react-toggle-track {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 0.25em !important;
+}
+
+.react-toggle-track-check {
+  transform: translate(-5px, 5px) !important;
+}
+
+.react-toggle-track-x {
+  transform: translate(-5px, 6px) !important;
+}
+
+.react-toggle-thumb {
+  top: 1px !important;
+}
+
+.react-toggle {
+  vertical-align: middle;
 }

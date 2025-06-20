@@ -36,37 +36,32 @@ export default function RawgSearch() {
   };
 
   return (
-    <div>
+    <form onSubmit={handleSubmit} className="auth-form">
       <h3>Import Game</h3>
-        <form onSubmit={handleSubmit} className='form-group'style={{ maxWidth: 400, margin: '0 auto 1rem' }}>
-          <input
-            type="text"
-            className='search-input'
-            value={query}
-            onChange={(evt) => setQuery(evt.target.value)}
-            placeholder="Type a game name…"
-            required
-          />
-          <button
-            type="submit"
-            disabled={loading}
-            class='btn btn-primary'
-            style={{ marginTop: '0.5rem', width: '100%' }}
-          >
-            {loading ? 'Searching…' : 'Search'}
-          </button>
-        </form>
+      <div className="form-group">
+        <input
+          type="text"
+          className="search-input"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          placeholder="Type a game name…"
+          required
+        />
+      </div>
+      <button type="submit" disabled={loading} className="btn btn-primary auth-submit">
+        {loading ? 'Searching…' : 'Search'}
+      </button>
 
-      {error && <p style={{ color: 'var(--color-danger)', textAlign: 'center' }}>{error}</p>}
+      {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
 
-      <ul style={{ listStyle: 'none', padding: 0, maxWidth: 400, margin: '0 auto' }}>
-        {results.map((game) => (
-          <li key={game.id} style={{ marginBottom: '1rem' }}>
+      <ul>
+        {results.map(game => (
+          <li key={game.id} style={{ margin: '0.5rem 0' }}>
             <strong>{game.name}</strong> ({game.released}){' '}
             {user && (
               <button
                 onClick={() => handleImport(game.id)}
-                class='btn btn-primary'
+                className="btn btn-secondary"
                 style={{ marginLeft: '0.5rem' }}
               >
                 Add to Library
@@ -75,6 +70,6 @@ export default function RawgSearch() {
           </li>
         ))}
       </ul>
-    </div>
+    </form>
   );
 };

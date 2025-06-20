@@ -1,4 +1,3 @@
-import "react-toggle/style.css";
 import Toggle from 'react-toggle';
 import { useColorScheme } from "../../hooks/useColorScheme";
 

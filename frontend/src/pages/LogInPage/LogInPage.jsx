@@ -36,7 +36,7 @@ export default function LogInPage({ setUser }) {
         onSubmit={handleSubmit}
         className='auth-form'
       >
-        <div class='form-group'>
+        <div className='form-group'>
           <h2>Log In</h2>
           <label>Email</label>
           <input
