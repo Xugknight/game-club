@@ -41,6 +41,7 @@ Key features:
   - React Router 
   - React Icons 
   - React Responsive  
+  - React Toggle
   - CSS 
   - Favicon Generator
 - **Backend**  
