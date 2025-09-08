@@ -1,12 +1,13 @@
 # Game Club
 
-A full-stack “game club” web app where players can discover games (via RAWG), add their own entries, write reviews, and favorite their games.  
+A full-stack social hub for gamers to discover, share, and review video games. Built with the RAWG API and custom CRUD features, Game-Club blends community interaction with a clean, responsive UI.  
 
 Key features:
-- Browse & search games by title or fetch from the RAWG API  
-- Registered users can add new games, write/edit/delete their reviews, and maintain a list of favorites   
-- User profiles exposing each user’s favorites and their username  
-- Light / dark mode toggle with persisted preference  
+- **Discover & Search**: Browse games via RAWG API or manually add your own entries
+- **Player Reviews**: Write, edit, and manage reviews with rich community feedback
+- **Favorites & Profiles**: Save your favorites and explore other players’ collections
+- **Light/Dark Mode**: Personalized theme toggle with saved preference
+- **Secure Auth**: JWT-based authentication and password hashing
 
 ---
 
