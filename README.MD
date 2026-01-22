@@ -71,7 +71,7 @@ _A social hub for gamers to discover, share, and review video games with a clean
 
 ## Try It Here!
 
-[![Heroku](https://img.shields.io/badge/demo-heroku-purple?logo=heroku)](https://game-club-7dfc89d36c85.herokuapp.com/)  
+[![Heroku](https://img.shields.io/badge/demo-heroku-purple?logo=heroku)](https://gameclub.knightworks.dev/)  
 
 ---
 
